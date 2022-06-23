@@ -1,4 +1,7 @@
 from datetime import date, datetime
+from time import strftime
+
+
 
 class Account :
 
@@ -9,7 +12,6 @@ class Account :
          self.deposits = []
          self.withdrawals = []
          self.transaction = 100
-         self.time = datetime.now()
          self.loan_balance = 0 
          
         def deposit(self,amount):
@@ -27,11 +29,12 @@ class Account :
                  return f"amount must be greater than zero"
 
              else :
-                self.balance -= amount
-                self.withdrawals.append(amount + self.time)
-                self.balance -= self.transaction
-                withdraw_details = {"date":date.strftime('%Y%m%d%H%M'),"amount":amount,"narration":"withdraw"}
-                return f"Dear {self.name} you have withdrawn {amount} and your balance is {self.balance}"
+               withdrawal_date = datetime.now()
+               self.balance -= amount
+               self.withdrawals.append(amount + self.time)
+               self.balance -= self.transaction
+               withdraw_details = {"date":date.strftime('%Y%m%d%H%M'),"amount":amount,"narration":"withdraw"}
+               return f"Dear {self.name} you have withdrawn {amount} and your balance is {self.balance}"
                  
         def statement_deposit(self):
              for x in self.deposit: 
@@ -47,10 +50,10 @@ class Account :
         def full_statements(self):
             for item in self.deposits and self.withdrawals:
 
-        def deposits_statement (self):
-            for deposit in self.deposits:
-             print(f"{deposit}")
-def withdraw_statement (self):
+             def deposits_statement (self):
+               for deposit in self.deposits:
+                 print(f"{deposit}")
+        def withdraw_statement (self):
             for withdraw in self.withdraws:
              print(withdraw)
 
@@ -74,7 +77,7 @@ def loan(self,amount):
          elif self.loan_balance > 0:
             return f"You have an outstanding amount of {self.loan_balance}"
          elif amount >= qualification:
-            return f"You cannot borrow more than {count//3}"
+            return f"You cannot borrow more than {count //3}"
          elif len(self.deposits)< 10:
             return f"You must have deposited more than 10 times "
          else:
